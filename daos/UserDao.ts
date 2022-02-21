@@ -19,13 +19,13 @@ export default class UserDao implements UserDaoI {
      * @returns UserDao
      */
     public static getInstance = (): UserDao => {
-        if(UserDao.userDao === null) {
+        if (UserDao.userDao === null) {
             UserDao.userDao = new UserDao();
         }
         return UserDao.userDao;
     }
-    
-    private constructor() {}
+
+    private constructor() { }
 
     /**
      * Uses UserModel to retrieve all user documents from users collection
@@ -57,15 +57,16 @@ export default class UserDao implements UserDaoI {
      * @param {User} user User object containing properties and their new values
      * @returns Promise To be notified when user is updated in the database
      */
-    updateUser = async (uid: string, user: User): Promise<any> =>
-        UserModel.updateOne(
-            {_id: uid},
-            {$set: user});
-    
+    updateUser = async (uid: string, user: User): Promise<any> => {
+        return await UserModel.updateOne(
+            { _id: uid },
+            { $set: user });
+    }
+
     updateUserSalaryByUsername = async (username: string, salary: number): Promise<any> =>
         UserModel.updateOne(
-            {username},
-            {$set: {salary: salary}});
+            { username },
+            { $set: { salary: salary } });
 
     /**
      * Removes user from the database.
@@ -73,7 +74,7 @@ export default class UserDao implements UserDaoI {
      * @returns Promise To be notified when user is removed from the database
      */
     deleteUser = async (uid: string): Promise<any> =>
-        UserModel.deleteOne({_id: uid});
+        UserModel.deleteOne({ _id: uid });
 
     /**
      * Removes all users from the database. Useful for testing
@@ -82,10 +83,10 @@ export default class UserDao implements UserDaoI {
      */
     deleteAllUsers = async (): Promise<any> =>
         UserModel.deleteMany({});
-    
+
     findUserByCredentials = async (username: string, password: string): Promise<any> =>
-        UserModel.findOne({username: username, password: password});
-    
+        UserModel.findOne({ username: username, password: password });
+
     findUserByUsername = async (username: string): Promise<any> =>
-        UserModel.findOne({username});
+        UserModel.findOne({ username });
 };
