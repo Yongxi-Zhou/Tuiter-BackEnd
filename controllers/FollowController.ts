@@ -25,13 +25,13 @@ export default class FollowController implements FollowControllerI {
 
     //get
     findAllFollowingUser = (req: Request, res: Response) =>
-        FollowController.followDao.findAllFollowingUser(req.params.uid).then(result => {
+        FollowController.followDao.findAllFollowingUser(req.params.uid).then(result =>
             res.json(result)
-        })
+        )
     findAllFollowedUser = (req: Request, res: Response) =>
-        FollowController.followDao.findAllFollowedUser(req.params.uid).then(result => {
+        FollowController.followDao.findAllFollowedUser(req.params.uid).then(result =>
             res.json(result)
-        })
+        )
 
     // post
     userFollowsAnotherUser = (req: Request, res: Response) =>
@@ -40,9 +40,9 @@ export default class FollowController implements FollowControllerI {
         )
     //delete
     userUnfollowsAnotherUser = (req: Request, res: Response) =>
-        FollowController.followDao.userUnfollowsAnotherUser(req.params.uid, req.params.auid).then(result => {
+        FollowController.followDao.userUnfollowsAnotherUser(req.params.uid, req.params.auid).then(result =>
             res.send(result)
-        })
+        )
     // userRemoveAllFollowedUser = (req: Request, res: Response) =>
     //     FollowController.followDao.userRemoveAllFollowedUser().then(result => {
     //         res.send(result)
