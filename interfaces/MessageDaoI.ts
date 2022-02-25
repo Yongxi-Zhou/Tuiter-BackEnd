@@ -9,11 +9,13 @@ export default interface MessageDaoI {
     findMessagedUserReceived(uid: string): Promise<Message[]>;
 
     //post
-    userSentMessagesToAnotherUser(uid: string, auid: string): Promise<Message>;
+    userSentMessagesToAnotherUser(uid: string, auid: string, message: Message): Promise<Message>;
     //delete
     userDeleteMessage(uid: string, auid: string): Promise<any>;
 
     //delete all
-    userDeleteAllMessageSent(uid: string, auid: string): Promise<any>;
-    userDeleteAllMessageReceived(uid: string, auid: string): Promise<any>;
+    userDeleteAllMessage(uid: string, auid: string): Promise<any>;
+
+    //put
+    updateLastMessage(uid: string, auid: string, message: Message): Promise<any>;
 };

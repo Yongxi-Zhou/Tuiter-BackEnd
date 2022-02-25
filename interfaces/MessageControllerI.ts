@@ -11,6 +11,8 @@ export default interface LikeControllerI {
     userDeleteMessage(req: Request, res: Response): void;
 
     //delete all
-    userDeleteAllMessageSent(req: Request, res: Response): void;
-    userDeleteAllMessageReceived(req: Request, res: Response): void;
+    userDeleteAllMessage(req: Request, res: Response): void;
+
+    //put
+    updateLastMessage(req: Request, res: Response): void;
 };

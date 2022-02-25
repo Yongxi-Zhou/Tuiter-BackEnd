@@ -18,6 +18,7 @@ import LikeController from "./controllers/LikeController";
 import mongoose from "mongoose";
 import FollowController from './controllers/FollowController';
 import BookmarkController from './controllers/BookmarkController';
+import MessageController from './controllers/MessageController';
 var cors = require('cors')
 
 // build the connection string
@@ -53,6 +54,7 @@ const tuitController = TuitController.getInstance(app);
 const likesController = LikeController.getInstance(app);
 const followsController = FollowController.getInstance(app);
 const bookmarksController = BookmarkController.getInstance(app);
+const messageController = MessageController.getInstance(app);
 
 /**
  * Start a server listening at port 4000 locally

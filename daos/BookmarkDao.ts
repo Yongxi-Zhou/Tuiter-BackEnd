@@ -1,5 +1,5 @@
-import BookmarkModel from "../mongoose/Bookmarks/BookmarkModel";
-import Bookmark from "../models/Bookmarks/Bookmark";
+import BookmarkModel from "../mongoose/bookmarks/BookmarkModel";
+import Bookmark from "../models/bookmarks/Bookmark";
 import BookmarkDaoI from "../interfaces/BookmarkDaoI";
 export default class BookmarkDao implements BookmarkDaoI {
     private static bookmarkDao: BookmarkDao | null = null;

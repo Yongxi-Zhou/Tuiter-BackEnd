@@ -1,4 +1,4 @@
 import mongoose from "mongoose";
 import MessageSchema from "./MessageSchema";
-const MessageModel = mongoose.model("FollowModel", MessageSchema);
+const MessageModel = mongoose.model("MessageModel", MessageSchema);
 export default MessageModel;
