@@ -1,3 +1,7 @@
+/**
+ * @file Declares Like data type representing relationship between
+ * users, as in creating a user
+ */
 import AccountType from "./AccountType";
 import MaritalStatus from "./MaritalStatus";
 import Location from "./Location";

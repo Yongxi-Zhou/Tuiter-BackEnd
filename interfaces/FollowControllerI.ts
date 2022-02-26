@@ -9,6 +9,6 @@ export default interface FollowControllerI {
     userFollowsAnotherUser(req: Request, res: Response): void
     //delete
     userUnfollowsAnotherUser(req: Request, res: Response): void
-    // userRemoveAllFollowedUser(req: Request, res: Response): void
-    // userRemoveAllFollowingUser(req: Request, res: Response): void
+    userRemoveAllFollower(req: Request, res: Response): void
+    userRemoveAllFollowing(req: Request, res: Response): void
 };

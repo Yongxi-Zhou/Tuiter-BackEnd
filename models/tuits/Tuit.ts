@@ -1,3 +1,7 @@
+/**
+ * @file Declares Like data type representing relationship between
+ * users and tuits, as in user posts a tuit
+ */
 import User from "../users/User";
 import Stats from "./Stats";
 
