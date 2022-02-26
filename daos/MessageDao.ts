@@ -2,7 +2,7 @@
  * @file Implements DAO managing data storage of Messages. Uses mongoose MessageModel
  * to integrate with MongoDB
  */
-import MessageModel from "../mongoose/messages/MessageModel";
+import MessageModel from "../mongoose/messages/messageModel";
 import Message from "../models/messages/Messages";
 import MessageDaoI from "../interfaces/MessageDaoI";
 
