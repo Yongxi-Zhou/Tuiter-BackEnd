@@ -10,7 +10,8 @@
  * Connects to a remote MongoDB instance hosted on the Atlas cloud database
  * service
  */
-import express, {Request, Response} from 'express';
+// A4
+import express, { Request, Response } from 'express';
 import CourseController from "./controllers/CourseController";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
