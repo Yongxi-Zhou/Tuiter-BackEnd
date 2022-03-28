@@ -1,10 +1,11 @@
-import {Request, Response, Express} from "express";
+import { Request, Response, Express } from "express";
 import UserDao from "../daos/UserDao";
+import { register } from "../services/AuthenticationService";
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const AuthenticationController = (app: Express) => {
-    
+
     const userDao: UserDao = UserDao.getInstance();
 
     const login = async (req: Request, res: Response) => {
@@ -12,6 +13,10 @@ const AuthenticationController = (app: Express) => {
         const username = user.username;
         const password = user.password;
         console.log(password)
+        if (password == null || username == null) {
+            res.sendStatus(403);
+        }
+
         const existingUser = await userDao
             .findUserByUsername(username);
         const match = await bcrypt.compare(password, existingUser.password);
@@ -50,6 +55,10 @@ const AuthenticationController = (app: Express) => {
     const profile = (req: Request, res: Response) => {
         // @ts-ignore
         const profile = req.session['profile'];
+        console.log(`profile: ${profile}`);
+        console.log(profile);
+
+
         if (profile) {
             res.json(profile);
         } else {
