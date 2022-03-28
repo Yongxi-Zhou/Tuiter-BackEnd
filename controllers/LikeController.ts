@@ -5,6 +5,7 @@ import { Express, Request, Response } from "express";
 import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeControllerI";
 import TuitDao from "../daos/TuitDao";
+import DislikeDao from "../daos/DislikeDao";
 
 /**
  * @class TuitController Implements RESTful Web service API for likes resource.
@@ -25,6 +26,7 @@ import TuitDao from "../daos/TuitDao";
  */
 export default class LikeController implements LikeControllerI {
     private static likeDao: LikeDao = LikeDao.getInstance();
+    private static dislikeDao: DislikeDao = DislikeDao.getInstance();
     private static tuitDao: TuitDao = TuitDao.getInstance();
     private static likeController: LikeController | null = null;
     /**
@@ -98,7 +100,11 @@ export default class LikeController implements LikeControllerI {
             profile._id : uid;
         try {
             const userAlreadyLikedTuit = await likeDao.findUserLikesTuit(userId, tid);
+            const userAlreadyDisLikedTuit = await LikeController.dislikeDao.findUserDislikesTuit(userId, tid);
+
             const howManyLikedTuit = await likeDao.countHowManyLikedTuit(tid);
+            const howManyDislikedTuit = await LikeController.dislikeDao.countHowManyDislikedTuit(tid);
+
             let tuit = await tuitDao.findTuitById(tid);
             console.log('------');
             console.log(tuit);
@@ -108,6 +114,11 @@ export default class LikeController implements LikeControllerI {
                 await likeDao.userUnlikesTuit(userId, tid);
                 tuit.stats.likes = howManyLikedTuit - 1;
             } else {
+                // userAlreadyDisLikedTuit, we need to delete the dislike relationship between user and tuit
+                if (userAlreadyDisLikedTuit) {
+                    await LikeController.dislikeDao.userUndislikesTuit(userId, tid);
+                    tuit.stats.dislikes = howManyDislikedTuit - 1;
+                }
                 await LikeController.likeDao.userLikesTuit(userId, tid);
                 tuit.stats.likes = howManyLikedTuit + 1;
             };

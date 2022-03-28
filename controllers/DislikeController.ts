@@ -7,6 +7,7 @@ import DislikeControllerI from "../interfaces/dislikeControllerI";
 import TuitDao from "../daos/TuitDao";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
+import LikeDao from "../daos/LikeDao";
 
 /**
  * @class TuitController Implements RESTful Web service API for dislikes resource.
@@ -26,8 +27,10 @@ import { ParsedQs } from "qs";
  * RESTful Web service API
  */
 export default class DislikeController implements DislikeControllerI {
-    private static dislikeDao: DislikeDao = DislikeDao.getInstance();
     private static tuitDao: TuitDao = TuitDao.getInstance();
+    private static dislikeDao: DislikeDao = DislikeDao.getInstance();
+    private static likeDao: LikeDao = LikeDao.getInstance();
+
     private static dislikeController: DislikeControllerI | null = null;
     /**
      * Creates singleton controller instance
@@ -103,7 +106,10 @@ export default class DislikeController implements DislikeControllerI {
 
         try {
             const userAlreadydislikedTuit = await dislikeDao.findUserDislikesTuit(userId, tid);
+            const userAlreadylikedTuit = await DislikeController.likeDao.findUserLikesTuit(userId, tid);
+
             const howManydislikedTuit = await dislikeDao.countHowManyDislikedTuit(tid);
+            const howManylikedTuit = await DislikeController.likeDao.countHowManyLikedTuit(tid);
             let tuit = await tuitDao.findTuitById(tid);
             console.log(tuit);
             console.log(howManydislikedTuit);
@@ -115,6 +121,10 @@ export default class DislikeController implements DislikeControllerI {
                 await dislikeDao.userUndislikesTuit(userId, tid);
                 tuit.stats.dislikes = howManydislikedTuit - 1;
             } else {
+                if (userAlreadylikedTuit) {
+                    await DislikeController.likeDao.userUnlikesTuit(userId, tid)
+                    tuit.stats.likes = howManylikedTuit - 1;
+                }
                 await DislikeController.dislikeDao.userDislikesTuit(userId, tid);
                 tuit.stats.dislikes = howManydislikedTuit + 1;
             };
