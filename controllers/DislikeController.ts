@@ -3,7 +3,7 @@
  */
 import { Express, Request, Response } from "express";
 import DislikeDao from "../daos/DislikeDao";
-import DislikeControllerI from "../interfaces/dislikeControllerI";
+import DislikeControllerI from "../interfaces/DislikeControllerI";
 import TuitDao from "../daos/TuitDao";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
