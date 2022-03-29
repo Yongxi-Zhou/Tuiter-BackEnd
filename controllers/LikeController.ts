@@ -60,12 +60,6 @@ export default class LikeController implements LikeControllerI {
         console.log('ifllllll');
 
         LikeController.likeDao.findUserLikesTuit(userId, tid).then(islike => res.json(islike))
-
-        // if (isLike) {
-        //     res.json({ isLike: true })
-        // } else {
-        //     res.json({ isLike: false })
-        // }
     }
 
     /**
