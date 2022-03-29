@@ -44,11 +44,25 @@ export default class DislikeController implements DislikeControllerI {
             app.get("/api/users/:uid/dislikes", DislikeController.dislikeController.findAllTuitsDislikedByUser);
             app.get("/api/tuits/:tid/dislikes", DislikeController.dislikeController.findAllUsersThatDislikedTuit);
             app.put("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.userTogglesTuitDislikes);
+            app.get("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.checkIfDisLike);
+
         }
         return DislikeController.dislikeController;
     }
 
     private constructor() { }
+
+    checkIfDisLike = async (req: Request, res: Response) => {
+        const tid = req.params.tid;
+        const uid = req.params.uid;
+        // @ts-ignore
+        const profile = req.session['profile'];
+        const userId = uid === "me" && profile ?
+            profile._id : uid;
+
+        const isDislike = await DislikeController.dislikeDao.findUserDislikesTuit(userId, tid).then(isdislike => res.json(isdislike))
+
+    }
 
     /**
      * Retrieves all users that disliked a tuit from the database

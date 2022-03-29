@@ -25,6 +25,7 @@ import DislikeDao from "../daos/DislikeDao";
  * RESTful Web service API
  */
 export default class LikeController implements LikeControllerI {
+
     private static likeDao: LikeDao = LikeDao.getInstance();
     private static dislikeDao: DislikeDao = DislikeDao.getInstance();
     private static tuitDao: TuitDao = TuitDao.getInstance();
@@ -41,11 +42,31 @@ export default class LikeController implements LikeControllerI {
             app.get("/api/users/:uid/likes", LikeController.likeController.findAllTuitsLikedByUser);
             app.get("/api/tuits/:tid/likes", LikeController.likeController.findAllUsersThatLikedTuit);
             app.put("/api/users/:uid/likes/:tid", LikeController.likeController.userTogglesTuitLikes);
+            app.get("/api/users/:uid/likes/:tid", LikeController.likeController.checkIfLike);
         }
         return LikeController.likeController;
     }
 
     private constructor() { }
+
+    checkIfLike = async (req: Request, res: Response) => {
+
+        const tid = req.params.tid;
+        const uid = req.params.uid;
+        // @ts-ignore
+        const profile = req.session['profile'];
+        const userId = uid === "me" && profile ?
+            profile._id : uid;
+        console.log('ifllllll');
+
+        LikeController.likeDao.findUserLikesTuit(userId, tid).then(islike => res.json(islike))
+
+        // if (isLike) {
+        //     res.json({ isLike: true })
+        // } else {
+        //     res.json({ isLike: false })
+        // }
+    }
 
     /**
      * Retrieves all users that liked a tuit from the database
