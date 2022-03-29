@@ -43,7 +43,8 @@ mongoose.connect(dbUrl).then(() => {
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: [/localhost:3000$/, /practical-goldberg-69c640\.netlify\.app$/, /resilient-chebakia-929800\.netlify\.app$/]
+    // origin: [/localhost:3000$/, /practical-goldberg-69c640\.netlify\.app$/, /resilient-chebakia-929800\.netlify\.app$/]
+    origin: "http://localhost:3000"
     // origin: process.env.CORS_ORIGIN
 }));
 
