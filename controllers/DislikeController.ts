@@ -60,7 +60,7 @@ export default class DislikeController implements DislikeControllerI {
         const userId = uid === "me" && profile ?
             profile._id : uid;
 
-        const isDislike = await DislikeController.dislikeDao.findUserDislikesTuit(userId, tid).then(isdislike => res.json(isdislike))
+        await DislikeController.dislikeDao.findUserDislikesTuit(userId, tid).then(isdislike => res.json(isdislike))
 
     }
 
