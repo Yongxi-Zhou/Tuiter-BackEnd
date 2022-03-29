@@ -76,7 +76,7 @@ export default class DislikeController implements DislikeControllerI {
             .then(dislikes => res.json(dislikes));
 
     /**
-     * Retrieves all tuits disliked by a user from the database
+     * Retrieves all tuits disliked by a user from the database!
      * @param {Request} req Represents request from client, including the path
      * parameter uid representing the user disliked the tuits
      * @param {Response} res Represents response to client, including the
