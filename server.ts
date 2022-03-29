@@ -44,7 +44,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: [/localhost:3000$/, /renju\.web\.cloudendpoint\.cn$/, /practical-goldberg-69c640\.netlify\.app/]
 }));
 
 const SECRET = 'process.env.SECRET';
