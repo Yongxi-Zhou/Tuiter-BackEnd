@@ -23,6 +23,7 @@ import GroupController from "./controllers/GroupController";
 import DislikeController from './controllers/DislikeController';
 const cors = require("cors");
 const session = require("express-session");
+require('dotenv').config();
 
 // build the connection string
 const PROTOCOL = "mongodb+srv";
@@ -37,6 +38,8 @@ const dbUrl = "mongodb+srv://yongxi:123zhou@tuiter.87xcz.mongodb.net/tuiter?retr
 // connect to the database
 mongoose.connect(dbUrl).then(() => {
     console.log("connect successfully!!");
+    console.log(process.env.CORS_ORIGIN);
+
 });
 
 
