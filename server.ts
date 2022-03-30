@@ -44,7 +44,8 @@ const app = express();
 app.use(cors({
     credentials: true,
     // origin: [/localhost:3000$/, /practical-goldberg-69c640\.netlify\.app$/, /resilient-chebakia-929800\.netlify\.app$/]
-    origin: "http://localhost:3000"
+    // origin: "http://localhost:3000"
+    origin: "https://resilient-chebakia-929800.netlify.app"
     // origin: process.env.CORS_ORIGIN
 }));
 
